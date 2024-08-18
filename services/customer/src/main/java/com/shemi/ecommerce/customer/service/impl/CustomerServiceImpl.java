@@ -24,9 +24,6 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer createCustomer(CustomerRequest body) {
         Customer save = customerRepository.save(customerMapper.toCustomer(body));
-        System.out.println();
-        System.out.println("the created customer " + save);
-        System.out.println();
         return save;
     }
 

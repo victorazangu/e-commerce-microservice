@@ -4,7 +4,7 @@ services:
     image: postgres:latest
     environment:
       POSTGRES_USER: victor
-      POSTGRES_PASSWORD: victor
+      POSTGRES_PASSWORD:
       PG_DATA: /var/lib/postgresql/data
     volumes:
       - postgres-data:/var/lib/postgresql/data
@@ -38,8 +38,8 @@ services:
     volumes:
       - mongo:/data
     environment:
-      MONGO_INITDB_ROOT_USERNAME: victor
-      MONGO_INITDB_ROOT_PASSWORD: victor
+      - MONGO_INITDB_ROOT_USERNAME=victor
+      - MONGO_INITDB_ROOT_PASSWORD=victor
 
   mongo-express:
     image: mongo-express
@@ -49,7 +49,7 @@ services:
       - 8081:8081
     environment:
       - ME_CONFIG_MONGODB_ADMINUSERNAME=victor
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=victor
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=
       - ME_CONFIG_MONGODB_URL=mongodb://victor:victor@mongo:27017/
       - ME_CONFIG_BASICAUTH=false
       - ME_CONFIG_MONGODB_SERVER=mongodb
