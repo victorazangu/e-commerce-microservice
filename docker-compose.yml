@@ -1,13 +1,13 @@
 services:
   postgres:
     container_name: ms_pg_sql
-    image: postgres:latest
+    image: postgres
     environment:
       POSTGRES_USER: victor
-      POSTGRES_PASSWORD:
+      POSTGRES_PASSWORD: victor
       PG_DATA: /var/lib/postgresql/data
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres:/var/lib/postgresql/data
     ports:
       - 5432:5432
     networks:
@@ -66,6 +66,6 @@ networks:
   microservices-net:
     driver: bridge
 volumes:
-  postgres-data:
+  postgres:
   pgadmin:
   mongo:
