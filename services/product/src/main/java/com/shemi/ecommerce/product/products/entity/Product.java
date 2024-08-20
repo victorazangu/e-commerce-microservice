@@ -19,6 +19,7 @@ public class Product {
     private Integer id;
     private String name;
     private String description;
+    @Column(name = "available_quantity")
     private Double availableQuantity;
     private BigDecimal price;
     @ManyToOne

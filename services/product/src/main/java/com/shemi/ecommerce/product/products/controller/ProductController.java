@@ -1,7 +1,12 @@
 package com.shemi.ecommerce.product.products.controller;
 
 import com.shemi.ecommerce.product.products.entity.Product;
+import com.shemi.ecommerce.product.products.mapper.ProductMapper;
+import com.shemi.ecommerce.product.products.record.ProductPurchaseRequest;
+import com.shemi.ecommerce.product.products.record.ProductPurchaseResponse;
+import com.shemi.ecommerce.product.products.record.ProductRequest;
 import com.shemi.ecommerce.product.products.service.impl.ProductServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +20,22 @@ import java.util.Map;
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
-    @Autowired
+
     private final ProductServiceImpl productService;
 
     @PostMapping
-    public ResponseEntity<Map<String, Product>> createPtoduct(@RequestBody Product body) {
+    public ResponseEntity<Map<String, Product>> createProduct(@RequestBody @Valid ProductRequest body) {
         Map<String, Product> data = new HashMap<>();
-        Product product = productService.createProduct(body);
+        Product req = ProductMapper.productRequestToProduct(body);
+        Product product = productService.createProduct(req);
         data.put("data", product);
         return ResponseEntity.ok(data);
+    }
+
+    @PostMapping("/purchase")
+    public ResponseEntity<Map<String, List<ProductPurchaseResponse>>> purchaseProducts(@RequestBody List<ProductPurchaseRequest> body) {
+        Map<String, List<ProductPurchaseRequest>> data = new HashMap<>();
+        return  null;
     }
 
     @GetMapping
