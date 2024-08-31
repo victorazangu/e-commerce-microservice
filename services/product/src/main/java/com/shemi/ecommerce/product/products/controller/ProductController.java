@@ -5,6 +5,7 @@ import com.shemi.ecommerce.product.products.mapper.ProductMapper;
 import com.shemi.ecommerce.product.products.record.ProductPurchaseRequest;
 import com.shemi.ecommerce.product.products.record.ProductPurchaseResponse;
 import com.shemi.ecommerce.product.products.record.ProductRequest;
+import com.shemi.ecommerce.product.products.record.ProductResponse;
 import com.shemi.ecommerce.product.products.service.impl.ProductServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,30 +27,35 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Map<String, Product>> createProduct(@RequestBody @Valid ProductRequest body) {
         Map<String, Product> data = new HashMap<>();
-        Product req = ProductMapper.productRequestToProduct(body);
-        Product product = productService.createProduct(req);
+        Product product = productService.createProduct(body);
         data.put("data", product);
         return ResponseEntity.ok(data);
     }
 
     @PostMapping("/purchase")
     public ResponseEntity<Map<String, List<ProductPurchaseResponse>>> purchaseProducts(@RequestBody List<ProductPurchaseRequest> body) {
-        Map<String, List<ProductPurchaseRequest>> data = new HashMap<>();
-        return  null;
+        var productIds = body
+                .stream()
+                .map(ProductPurchaseRequest::productId)
+                .toList();
+
+        Map<String, List<ProductPurchaseResponse>> data = new HashMap<>();
+        data.put("data", productService.purchaseProducts(body));
+        return null;
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, List<Product>>> getAllProducts() {
-        Map<String, List<Product>> data = new HashMap<>();
-        List<Product> products = productService.getAllProducts();
+    public ResponseEntity<Map<String, List<ProductResponse>>> getAllProducts() {
+        Map<String, List<ProductResponse>> data = new HashMap<>();
+        List<ProductResponse> products = productService.getAllProducts();
         data.put("data", products);
         return ResponseEntity.ok(data);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Map<String, Product>> getProductById(@PathVariable Integer id) {
-        Map<String, Product> data = new HashMap<>();
-        Product product = productService.getProduct(id);
+    public ResponseEntity<Map<String, ProductResponse>> getProductById(@PathVariable Integer id) {
+        Map<String, ProductResponse> data = new HashMap<>();
+        ProductResponse product = productService.getProduct(id);
         data.put("data", product);
         return ResponseEntity.ok(data);
     }

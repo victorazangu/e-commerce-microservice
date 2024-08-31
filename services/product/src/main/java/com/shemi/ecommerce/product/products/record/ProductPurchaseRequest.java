@@ -1,4 +1,12 @@
 package com.shemi.ecommerce.product.products.record;
 
-public class ProductPurchaseRequest {
+import jakarta.validation.constraints.NotNull;
+
+public record ProductPurchaseRequest(
+        @NotNull(message = "Product is mandatory")
+        Integer productId,
+        @NotNull(message = "Quantity is mandatory")
+        Double quantity
+) {
+
 }
