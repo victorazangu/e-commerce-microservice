@@ -24,8 +24,8 @@ public class OrderController {
     public ResponseEntity<Map<String, OrderResponse>> createOrder(
             @RequestBody @Valid OrderRequest request
     ) {
-        Map<String,OrderResponse> data= new HashMap<>();
-        data.put("data",service.createOrder(request));
+        Map<String, OrderResponse> data = new HashMap<>();
+        data.put("data", service.createOrder(request));
         return ResponseEntity.ok(data);
     }
 }
