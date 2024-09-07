@@ -1,19 +1,10 @@
 package com.shemi.ecommerce.order.mapper;
 
 import com.shemi.ecommerce.order.entity.Order;
-import com.shemi.ecommerce.order.enums.PaymentMethod;
 import com.shemi.ecommerce.order.record.OrderRequest;
 import com.shemi.ecommerce.order.record.OrderResponse;
-import com.shemi.ecommerce.product.record.PurchaseResponse;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class OrderMapper {

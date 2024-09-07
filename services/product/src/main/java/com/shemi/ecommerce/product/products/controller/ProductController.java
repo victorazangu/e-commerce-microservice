@@ -61,7 +61,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Product>> updateProduct(@RequestBody Product body, @PathVariable Integer id) {
+    public ResponseEntity<Map<String, Product>> updateProduct(@RequestBody  Product body, @PathVariable Integer id) {
         Map<String, Product> data = new HashMap<>();
         Product product = productService.updateProduct(body, id);
         data.put("data", product);

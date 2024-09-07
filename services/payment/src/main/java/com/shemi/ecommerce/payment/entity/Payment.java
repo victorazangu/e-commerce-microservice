@@ -1,7 +1,6 @@
-package com.shemi.ecommerce.order.entity;
+package com.shemi.ecommerce.payment.entity;
 
-import com.shemi.ecommerce.enums.PaymentMethod;
-import com.shemi.ecommerce.orderline.entity.OrderLine;
+import com.shemi.ecommerce.payment.enums.PaymentMethod;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,30 +9,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
 
-import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.EnumType.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Getter
 @Setter
+@Getter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "customer_orders")
-public class Order {
+@Table(name = "payments")
+public class Payment {
     @Id
     @GeneratedValue
     private Integer id;
-    private String reference;
-    private BigDecimal totalAmount;
+    private BigDecimal amount;
     @Enumerated(STRING)
     private PaymentMethod paymentMethod;
-    private String customerId;
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderLine> orderLines;
+    private Integer orderId;
     @CreatedDate
     @Column(updatable = false,nullable = false)
     private LocalDateTime createdAt;

@@ -1,4 +1,4 @@
-package com.shemi.ecommerce.order.enums;
+package com.shemi.ecommerce.payment.enums;
 
 public enum PaymentMethod {
     PAYPAL,

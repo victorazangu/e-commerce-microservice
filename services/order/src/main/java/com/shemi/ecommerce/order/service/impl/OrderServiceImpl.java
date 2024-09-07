@@ -12,6 +12,8 @@ import com.shemi.ecommerce.order.service.OrderService;
 import com.shemi.ecommerce.orderline.record.OrderLineRequest;
 import com.shemi.ecommerce.orderline.service.OrderLineService;
 import com.shemi.ecommerce.orderline.service.impl.OrderLineServiceImpl;
+import com.shemi.ecommerce.payment.clients.PaymentClient;
+import com.shemi.ecommerce.payment.record.PaymentRequest;
 import com.shemi.ecommerce.product.clients.ProductClient;
 import com.shemi.ecommerce.product.record.PurchaseRequest;
 import com.shemi.ecommerce.product.record.PurchaseResponse;
@@ -33,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper mapper;
     private final OrderLineServiceImpl orderLineService;
     private final OrderProducer orderProducer;
+    private final PaymentClient paymentClient;
 
 
     public OrderResponse createOrder(@Valid OrderRequest request) {
@@ -51,10 +54,15 @@ public class OrderServiceImpl implements OrderService {
                     )
             );
         }
+        var paymentRequest = new PaymentRequest(
+                request.amount(),
+                request.paymentMethod(),
+                order.getId(),
+                order.getReference(),
+                customer
+        );
+        paymentClient.requestOrderPayment(paymentRequest);
 
-        // TODO start payment process -> payment ms->
-
-        //TODO send order confirmation --> notification ms ->
         orderProducer.sendOrderConfirmation(
                 new OrderConfirmation(
                         request.reference(),

@@ -1,6 +1,6 @@
 package com.shemi.ecommerce.order.record;
 
-import com.shemi.ecommerce.order.enums.PaymentMethod;
+import com.shemi.ecommerce.enums.PaymentMethod;
 import com.shemi.ecommerce.product.record.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
