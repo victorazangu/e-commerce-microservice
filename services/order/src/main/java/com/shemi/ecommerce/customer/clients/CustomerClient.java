@@ -1,5 +1,6 @@
 package com.shemi.ecommerce.customer.clients;
 
+import com.shemi.ecommerce.customer.record.CustomerResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
