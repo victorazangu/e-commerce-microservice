@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            color: #4CAF50;
+        }
+        p {
+            color: #555555;
+            line-height: 1.6;
+        }
+        .product-list {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .product-list th, .product-list td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .product-list th {
+            background-color: #f2f2f2;
+        }
+        .total-row {
+            font-weight: bold;
+        }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #777777;
+        }
+        .footer p {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <h1>Order Confirmation</h1>
+    <p>Dear <strong th:text="${customerName}"></strong>,</p>
+    <p>Thank you for your order! We have received your order and are currently processing it.</p>
+    <p>Your order reference number is: <strong th:text="${orderReference}"></strong>.</p>
+
+    <h2>Order Details:</h2>
+    <table class="product-list">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr class="total-row">
+            <td colspan="2">Grand Total</td>
+            <td th:text="${totalAmount}"></td>
+        </tr>
+        </tfoot>
+    </table>
+
+    <p>We will notify you once your order is shipped.</p>
+
+    <p>Best regards,</p>
+    <p>The Victor Shemi Team</p>
+
+    <div class="footer">
+        <p>This is an automated message, Please do not reply to this email</p>
+        <p>&copy; 2024 The Victor Shemi. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
